@@ -17,41 +17,66 @@ BOOL isEnglishFirstLetter(NSString* value)
     return NO;
 }
 
-float toSum(float value1, float value2){
-    return value1 + value2;
+NSMutableArray<NSString *>* createArray(int countElements){
+    NSMutableArray *simpleArray = [[NSMutableArray alloc] initWithObjects: @"default", nil];
+    for (int i = 1; i < countElements; i++){
+        NSString *number = [NSString stringWithFormat:@"%d",i];
+        [simpleArray addObject: [@"element" stringByAppendingString: number]];
+    }
+    return simpleArray;
 }
 
-float toDeduct(float value1, float value2){
-    return value1 - value2;
-}
-
-float toDivide(float value1, float value2){
-    if (value2 != 0){
-        return value1 / value2;
-    } else {
-        return 0;
+void printArray(NSArray *array){
+    NSString *element;
+    for (element in array){
+        NSLog(@"%@", element);
     }
 }
 
-float toMultiply(float value1, float value2){
-    return value1 * value2;
+float calculate(float value1, NSString *operation, float value2){
+    if ([operation isEqualToString:@"toSum"]){
+       return value1 + value2;
+    }
+    if ([operation isEqualToString:@"toDeduct"]){
+        return value1 - value2;
+    }
+    if ([operation isEqualToString:@"toDivide"] && value2 != 0){
+        return value1 / value2;
+    }
+    if ([operation isEqualToString:@"toMultiply"]){
+        return value1 * value2;
+    }
+    return 0;
 }
+
 
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
 
-        NSLog(@"Result: %hhd", isEnglishFirstLetter(@"B"));
-        NSLog(@"Result: %hhd", isEnglishFirstLetter(@" F"));
-        NSLog(@"Result: %hhd", isEnglishFirstLetter(@"hi かな"));
-        NSLog(@"Result: %hhd", isEnglishFirstLetter(@"ら"));
-        NSLog(@"Result: %hhd", isEnglishFirstLetter(@"8"));
+        // создать и распечатать массив
+        printArray(createArray(15));
         
-        NSLog(@"Result (сложение): %.2f", toSum(17, 43.6888f));
-        NSLog(@"Result (вычитание): %.2f", toDeduct(34, 45));
-        NSLog(@"Result (деление): %.2f", toDivide(-18, 4.66f));
-        NSLog(@"Result (деление на ноль): %.2f", toDivide(-15, 0));
-        NSLog(@"Result (умножение): %.2f", toMultiply(23, 56));
+        // использование словаря в калькуляторе
+        NSDictionary *operations = [@{
+                                      @"+": @"toSum",
+                                      @"-": @"toDeduct",
+                                      @"/": @"toDivide",
+                                      @"*": @"toMultiply"
+                                    } mutableCopy];
+        
+        NSLog(@"Result (сложение): %.2f", calculate(17, operations[@"+"], 43.6888f));
+        NSLog(@"Result (вычитание): %.2f", calculate(34, operations[@"-"], 45));
+        NSLog(@"Result (деление): %.2f", calculate(-18, operations[@"/"], 4.66f));
+        NSLog(@"Result (деление на ноль): %.2f", calculate(-15, operations[@"/"], 0));
+        NSLog(@"Result (умножение): %.2f", calculate(23, operations[@"*"],  56));
+        
+        // определение является ли первый символ английской буквой
+        NSArray *texts = @[@"B", @" F", @"hi かな", @"ら", @"8"];
+        NSString *element;
+        for (element in texts){
+            NSLog(@"Check for %@: %hhd", element, isEnglishFirstLetter(element));
+        }
         
     }
     return 0;
