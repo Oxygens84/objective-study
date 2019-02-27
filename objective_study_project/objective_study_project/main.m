@@ -8,6 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+enum CalculatorOperations{
+    toSum,
+    toDeduct,
+    toDivide,
+    toMultiply
+};
+
+typedef enum CalculatorOperations CalculatorOperations;
+
+
 BOOL isEnglishFirstLetter(NSString* value)
 {
     unichar firstLetter = [value.capitalizedString characterAtIndex:0];
@@ -50,6 +60,24 @@ float calculate(float value1, NSString *operation, float value2){
 }
 
 
+float calculator(float value1, CalculatorOperations operation, float value2){
+    if (operation == toSum){
+        return value1 + value2;
+    }
+    if (operation == toDeduct){
+        return value1 - value2;
+    }
+    if (operation == toDivide && value2 != 0){
+        return value1 / value2;
+    }
+    if (operation == toMultiply){
+        return value1 * value2;
+    }
+    return 0;
+}
+
+
+
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
@@ -70,6 +98,10 @@ int main(int argc, const char * argv[]) {
         NSLog(@"Result (деление): %.2f", calculate(-18, operations[@"/"], 4.66f));
         NSLog(@"Result (деление на ноль): %.2f", calculate(-15, operations[@"/"], 0));
         NSLog(@"Result (умножение): %.2f", calculate(23, operations[@"*"],  56));
+        
+        // использование enum в калькуляторе
+        CalculatorOperations action = toSum;
+        NSLog(@"Result (сложение): %.2f", calculator(17, action, 43.6888f));
         
         // определение является ли первый символ английской буквой
         NSArray *texts = @[@"B", @" F", @"hi かな", @"ら", @"8"];
