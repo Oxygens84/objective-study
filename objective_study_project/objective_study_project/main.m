@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Student.h"
 
 enum CalculatorOperations{
     toSum,
@@ -110,6 +111,24 @@ int main(int argc, const char * argv[]) {
             NSLog(@"Check for %@: %hhd", element, isEnglishFirstLetter(element));
         }
         
+        // вывести список студентов
+        
+        Student *student1 = [[Student alloc] init];
+        [student1 setStudentId: 1];
+        [student1 setStudentName: @"Batman"];
+        [student1 setStudentSurname: @"W"];
+        [student1 setStudentAge: 30];
+        
+        Student *student2 = [[Student alloc] init];
+        student2.studentId = 2;
+        student2.studentName = @"Robin";
+        student2.studentSurname = @"S";
+        student2.studentAge = 20;
+        
+        NSMutableArray *studentsList =
+              [[NSMutableArray alloc] initWithObjects: student1, student2, nil];
+    
+        NSLog(@"%@", studentsList);
     }
     return 0;
 }
