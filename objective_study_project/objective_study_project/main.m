@@ -113,17 +113,17 @@ int main(int argc, const char * argv[]) {
         
         // вывести список студентов
         
-        Student *student1 = [[Student alloc] init];
-        [student1 setStudentId: 1];
-        [student1 setStudentName: @"Batman"];
-        [student1 setStudentSurname: @"W"];
-        [student1 setStudentAge: 30];
+        Student *student1 = [[Student alloc] initWithData: 1
+                                              studentName: @"Batman"
+                                           studentSurname: @"W"
+                                               studentAge: 30];
         
-        Student *student2 = [[Student alloc] init];
-        student2.studentId = 2;
-        student2.studentName = @"Robin";
-        student2.studentSurname = @"S";
-        student2.studentAge = 20;
+        Student *student2 = [[Student alloc] initWithData: 2
+                                              studentName: @"Robin"
+                                           studentSurname: @"S"
+                                               studentAge: 20];
+        [student1 addYearToAge];
+        [student2 addYearToAge];
         
         NSMutableArray *studentsList =
               [[NSMutableArray alloc] initWithObjects: student1, student2, nil];

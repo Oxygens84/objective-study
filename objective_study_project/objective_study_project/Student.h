@@ -10,33 +10,20 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Student : NSObject {
-//    @private
-//    NSInteger _studentId;
-//    NSInteger _studentAge;
-//    NSString *_studentName;
-//    NSString *_studentSurname;
-}
+@interface Student : NSObject
 
-@property (assign) NSInteger studentId;
-@property (assign) NSInteger studentAge;
+@property (nonatomic, assign, readonly) NSInteger studentId;
+@property (nonatomic, assign, readonly) NSInteger studentAge;
 @property (nonatomic, strong) NSString *studentName;
 @property (nonatomic, strong) NSString *studentSurname;
+@property (nonatomic, strong) NSString *studentFullname;
 
-- (void) setStudentId: (NSInteger)studentId
-          studentName: (NSString *)studentName
-       studentSurname: (NSString *)studentSurname
-           studentAge: (NSInteger)studentAge;
+-(instancetype) initWithData: (NSInteger)studentId
+                 studentName: (NSString*)studentName
+              studentSurname: (NSString*)studentSurname
+                  studentAge: (NSUInteger)studentAge;
 
-//- (NSString *) studentName;
-//- (NSString *) studentSurname;
-//- (NSInteger) studentId;
-//- (NSInteger) studentAge;
-
-//- (void) setStudentName: (NSString *) studentName;
-//- (void) setStudentSurname: (NSString *) studentSurname;
-//- (void) setStudentId: (NSInteger) studentId;
-//- (void) setStudentAge: (NSInteger) studentAge;
+-(void)addYearToAge;
 
 @end
 
