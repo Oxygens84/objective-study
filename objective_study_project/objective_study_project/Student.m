@@ -30,6 +30,7 @@
         _studentSurname = studentSurname;
         _studentAge = studentAge;
     }
+    [self autorelease];
     return self;
 }
 
@@ -37,6 +38,9 @@
     _studentAge++;
 }
 
-
+-(void)dealloc {
+    [super dealloc];
+    NSLog(@"Memory cleaned up");
+}
 
 @end
