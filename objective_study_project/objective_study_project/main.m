@@ -7,6 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Student.h"
+
+enum CalculatorOperations{
+    toSum,
+    toDeduct,
+    toDivide,
+    toMultiply
+};
+
+typedef enum CalculatorOperations CalculatorOperations;
+
 
 BOOL isEnglishFirstLetter(NSString* value)
 {
@@ -50,6 +61,24 @@ float calculate(float value1, NSString *operation, float value2){
 }
 
 
+float calculator(float value1, CalculatorOperations operation, float value2){
+    if (operation == toSum){
+        return value1 + value2;
+    }
+    if (operation == toDeduct){
+        return value1 - value2;
+    }
+    if (operation == toDivide && value2 != 0){
+        return value1 / value2;
+    }
+    if (operation == toMultiply){
+        return value1 * value2;
+    }
+    return 0;
+}
+
+
+
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
@@ -71,6 +100,10 @@ int main(int argc, const char * argv[]) {
         NSLog(@"Result (деление на ноль): %.2f", calculate(-15, operations[@"/"], 0));
         NSLog(@"Result (умножение): %.2f", calculate(23, operations[@"*"],  56));
         
+        // использование enum в калькуляторе
+        CalculatorOperations action = toSum;
+        NSLog(@"Result (сложение): %.2f", calculator(17, action, 43.6888f));
+        
         // определение является ли первый символ английской буквой
         NSArray *texts = @[@"B", @" F", @"hi かな", @"ら", @"8"];
         NSString *element;
@@ -78,6 +111,24 @@ int main(int argc, const char * argv[]) {
             NSLog(@"Check for %@: %hhd", element, isEnglishFirstLetter(element));
         }
         
+        // вывести список студентов
+        
+        Student *student1 = [[Student alloc] init];
+        [student1 setStudentId: 1];
+        [student1 setStudentName: @"Batman"];
+        [student1 setStudentSurname: @"W"];
+        [student1 setStudentAge: 30];
+        
+        Student *student2 = [[Student alloc] init];
+        student2.studentId = 2;
+        student2.studentName = @"Robin";
+        student2.studentSurname = @"S";
+        student2.studentAge = 20;
+        
+        NSMutableArray *studentsList =
+              [[NSMutableArray alloc] initWithObjects: student1, student2, nil];
+    
+        NSLog(@"%@", studentsList);
     }
     return 0;
 }
