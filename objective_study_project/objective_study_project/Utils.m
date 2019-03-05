@@ -12,7 +12,6 @@
 
 +(instancetype)initNewInstance{
     Utils *utils = [Utils new];
-    [utils autorelease];
     return utils;
 }
 
@@ -42,9 +41,5 @@
     }
 }
 
--(void)dealloc {
-    [super dealloc];
-    NSLog(@"Memory cleaned up");
-}
 
 @end

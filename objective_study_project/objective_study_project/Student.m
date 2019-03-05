@@ -30,17 +30,11 @@
         _studentSurname = studentSurname;
         _studentAge = studentAge;
     }
-    [self autorelease];
     return self;
 }
 
 -(void)addYearToAge{
     _studentAge++;
-}
-
--(void)dealloc {
-    [super dealloc];
-    NSLog(@"Memory cleaned up");
 }
 
 @end

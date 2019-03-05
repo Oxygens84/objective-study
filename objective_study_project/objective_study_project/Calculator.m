@@ -12,7 +12,6 @@
 
 +(instancetype) initNewInstance{
     Calculator *calculator = [Calculator new];
-    [calculator autorelease];
     return calculator;
 }
 
@@ -32,11 +31,6 @@
         return value1 * value2;
     }
     return 0;
-}
-
--(void)dealloc {
-    [super dealloc];
-    NSLog(@"Memory cleaned up");
 }
 
 @end
