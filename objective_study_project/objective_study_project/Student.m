@@ -8,55 +8,39 @@
 
 #import "Student.h"
 
-//@interface Student()
-//@property (nonatomic, strong) NSInteger studentId;
-//@property (nonatomic, strong) NSInteger studentAge;
-//@property (nonatomic, strong) NSString *studentName;
-//@property (nonatomic, strong) NSString *studentSurname;
-//@end;
-
 @implementation Student
 
-- (NSString *)description
-{
-    return [NSString stringWithFormat:@"Student %li: %@ %@ (age %li)",
-            (long)_studentId, _studentName, _studentSurname, (long)_studentAge];
+-(NSString *)studentFullname{
+    return [self.studentName stringByAppendingFormat:@" %@", self.studentSurname];
 }
 
-- (void) setStudentId: (NSInteger)studentId
-          studentName: (NSString *)studentName
-       studentSurname: (NSString *)studentSurname
-           studentAge: (NSInteger)studentAge {
-    _studentId = studentId;
-    _studentName = studentName;
-    _studentSurname = studentSurname;
-    _studentAge = studentAge;
+-(NSString *)description{
+    return [NSString stringWithFormat:@"Student %li %@: %@, %@, %li years old",
+            self.studentId, self.studentFullname, self.studentName, self.studentSurname, self.studentAge];
 }
 
-//- (NSString *) studentName {
-//    return _studentName;
-//}
-//- (NSString *) studentSurname {
-//    return _studentSurname;
-//}
-//- (NSInteger) studentId {
-//    return _studentId;
-//}
-//- (NSInteger) studentAge {
-//    return _studentAge;
-//}
+-(instancetype) initWithData: (NSInteger)studentId
+                 studentName: (NSString*)studentName
+              studentSurname: (NSString*)studentSurname
+                  studentAge: (NSUInteger)studentAge {
+    self = [super init];
+    if (self){
+        _studentId = studentId;
+        _studentName = studentName;
+        _studentSurname = studentSurname;
+        _studentAge = studentAge;
+    }
+    [self autorelease];
+    return self;
+}
 
-//- (void) setStudentName: (NSString *) studentName {
-//    _studentName = studentName;
-//}
-//- (void) setStudentSurname: (NSString *) studentSurname{
-//    _studentSurname = studentSurname;
-//}
-//- (void) setStudentId: (NSInteger) studentId {
-//    _studentId = studentId;
-//}
-//- (void) setStudentAge: (NSInteger) studentAge {
-//    _studentAge = studentAge;
-//}
+-(void)addYearToAge{
+    _studentAge++;
+}
+
+-(void)dealloc {
+    [super dealloc];
+    NSLog(@"Memory cleaned up");
+}
 
 @end
