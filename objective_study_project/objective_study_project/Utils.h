@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(NSMutableArray<NSString *>*) createArray: (int) countElements ;
 
+-(NSMutableArray*) createRandomArray: (int) countElements;
+
 -(void) printArray: (NSArray *) array;
 
 @end

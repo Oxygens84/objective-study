@@ -7,12 +7,12 @@
 //
 
 #import "Utils.h"
+#import <stdlib.h>
 
 @implementation Utils
 
 +(instancetype)initNewInstance{
     Utils *utils = [Utils new];
-    [utils autorelease];
     return utils;
 }
 
@@ -35,16 +35,22 @@
     return simpleArray;
 }
 
+-(NSMutableArray*) createRandomArray: (int) countElements {
+    NSMutableArray *simpleArray = [NSMutableArray new];
+    for (int i = 0; i < countElements; i++){
+        int value = arc4random_uniform(100);
+        [simpleArray addObject: [NSNumber numberWithInt:(value)]];
+    }
+    return simpleArray;
+}
+
 -(void) printArray: (NSArray *)array{
     NSString *element;
+    NSLog(@"%@", @"-----------------------");
     for (element in array){
         NSLog(@"%@", element);
     }
-}
-
--(void)dealloc {
-    [super dealloc];
-    NSLog(@"Memory cleaned up");
+    NSLog(@"%@", @"-----------------------");
 }
 
 @end

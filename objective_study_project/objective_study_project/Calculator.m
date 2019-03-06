@@ -12,7 +12,6 @@
 
 +(instancetype) initNewInstance{
     Calculator *calculator = [Calculator new];
-    [calculator autorelease];
     return calculator;
 }
 
@@ -34,9 +33,31 @@
     return 0;
 }
 
--(void)dealloc {
-    [super dealloc];
-    NSLog(@"Memory cleaned up");
+-(void) calculatorFor: (float)value1
+               value2: (float)value2 {
+    
+    dispatch_queue_t globalQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+
+    dispatch_async(globalQueue, ^{
+        NSLog(@"res %f + %f = %f", value1, value2, value1 + value2);
+    });
+
+    dispatch_async(globalQueue, ^{
+        NSLog(@"res %f - %f = %f", value1, value2, value1 - value2);
+    });
+    
+    dispatch_async(globalQueue, ^{
+        if (value2 == 0) {
+            NSLog(@"Error %f = 0", value2);
+        } else {
+            NSLog(@"res %f / %f = %f", value1, value2, value1 / value2);
+        }
+    });
+    
+    dispatch_async(globalQueue, ^{
+        NSLog(@"res %f * %f = %f", value1, value2, value1 * value2);
+    });
 }
+
 
 @end

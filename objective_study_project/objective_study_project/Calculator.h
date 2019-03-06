@@ -27,6 +27,9 @@ typedef enum CalculatorOperations CalculatorOperations;
                          value1: (float)value1
                          value2: (float)value2;
 
+-(void) calculatorFor: (float)value1
+               value2: (float)value2;
+    
 @end
 
 NS_ASSUME_NONNULL_END
